@@ -608,7 +608,7 @@ class TelegramPlugin(octoprint.plugin.EventHandlerPlugin,
 				pass
 
 	def on_startup(self, host, port):
-		self.main.tcmd.port = port
+		self.tcmd.port = port
 
 	def on_shutdown(self):
 		self.on_event("PrinterShutdown",{})
@@ -1336,7 +1336,7 @@ class TelegramPlugin(octoprint.plugin.EventHandlerPlugin,
 			current_time = datetime.datetime.today()
 			if not currentData["progress"]["printTimeLeft"]:
 				if not printTime == 0:
-					finish_time = current_time + datetime.timedelta(0,printTime)
+					finish_time = current_time + datetime.timedelta(0,int(printTime))
 				else:
 					return ""
 			else:
