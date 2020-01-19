@@ -260,7 +260,7 @@ class TelegramListener(threading.Thread):
 	def handleTextMessage(self, message, chat_id, from_id):
 		# We got a chat message.
 		# handle special messages from groups (/commad@BotName)
-		command = str(message['message']['text'].split('@')[0].encode('utf-8'))
+		command = message['message']['text'].split('@')[0]
 		parameter = ""
 		# TODO: Do we need this anymore?
 		# reply_to_messages will be send on value inputs (eg notification height)
