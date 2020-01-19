@@ -325,14 +325,14 @@ class TCMD():
 					self.main.send_msg(self.gEmo('question') + unicode(command['name'])+"\nExecute system command?",responses=[[[self.main.emojis['check'] + gettext(" Execute"),"/sys_do_" + unicode(parameter)], [self.main.emojis['leftwards arrow with hook'] + gettext(" Back"),"/sys_back"]]],chatID=chat_id, msg_id = self.main.getUpdateMsgId(chat_id))
 					return
 				else:
-					async = command["async"] if "async" in command else False
+					run_async = command["async"] if "async" in command else False
 					self._logger.info("Performing command: %s" % command["command"])
 					try:
 						# we run this with shell=True since we have to trust whatever
 						# our admin configured as command and since we want to allow
 						# shell-alike handling here...
-						p = sarge.run(command["command"], stderr=sarge.Capture(), shell=True, async_=async)
-						if not async:
+						p = sarge.run(command["command"], stderr=sarge.Capture(), shell=True, async_=run_async)
+						if not run_async:
 							if p.returncode != 0:
 								returncode = p.returncode
 								stderr_text = p.stderr.text
