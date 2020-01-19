@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from PIL import Image
 from subprocess import Popen, PIPE
+import traceback
 import threading, requests, re, time, datetime, StringIO, json, random, logging, traceback, io, collections, os, flask,base64,PIL, pkg_resources,subprocess,zipfile,glob,resource #imageio
 import octoprint.plugin, octoprint.util, octoprint.filemanager
 from flask.ext.babel import gettext
@@ -1242,6 +1243,7 @@ class TelegramPlugin(octoprint.plugin.EventHandlerPlugin,
 			self._logger.debug("Saved Photo "+ str(chat_id))
 
 		except Exception as ex:
+			traceback.format_exc()
 			self._logger.error("Can't load UserImage: " + str(ex))
 
 	def test_token(self, token=None):
@@ -1338,7 +1340,7 @@ class TelegramPlugin(octoprint.plugin.EventHandlerPlugin,
 				else:
 					return ""
 			else:
-				finish_time = current_time + datetime.timedelta(0,currentData["progress"]["printTimeLeft"])
+				finish_time = current_time + datetime.timedelta(0,int(currentData["progress"]["printTimeLeft"]))
 			strtime = format_time(finish_time)
 			strdate = ""
 			if finish_time.day > current_time.day:
