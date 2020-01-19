@@ -607,7 +607,7 @@ class TelegramPlugin(octoprint.plugin.EventHandlerPlugin,
 				pass
 
 	def on_startup(self, host, port):
-		self.tcmd.port = port
+		self.main.tcmd.port = port
 
 	def on_shutdown(self):
 		self.on_event("PrinterShutdown",{})
