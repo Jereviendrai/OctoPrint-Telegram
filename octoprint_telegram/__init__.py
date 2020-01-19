@@ -1671,6 +1671,7 @@ def get_implementation_class():
 
 		
 __plugin_name__ = "Telegram Notifications"
+__plugin_pythoncompat__ = ">=2.7,<4"
 __plugin_implementation__ = get_implementation_class()
 __plugin_hooks__ = {
 	"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,

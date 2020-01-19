@@ -14,7 +14,7 @@ plugin_package = "octoprint_telegram"
 plugin_name = "OctoPrint-Telegram"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "1.5.1"
+plugin_version = "1.5.2"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
@@ -57,7 +57,9 @@ plugin_ignored_packages = []
 # Example:
 #     plugin_requires = ["someDependency==dev"]
 #     additional_setup_parameters = {"dependency_links": ["https://github.com/someUser/someRepo/archive/master.zip#egg=someDependency-dev"]}
-additional_setup_parameters = {}
+additional_setup_parameters = {
+    "use_2to3": True
+}
 
 ########################################################################################################################
 
