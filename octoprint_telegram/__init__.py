@@ -1327,8 +1327,10 @@ class TelegramPlugin(octoprint.plugin.EventHandlerPlugin,
 			output.close()
 		return data
 
+	def time2secs(self, t):
+		return sum(int(x) * 60 ** pow for pow, x in enumerate(t.split(':')[::-1]))
 
-	def calculate_ETA(self,printTime = 0):
+	def calculate_ETA(self, printTime = 0):
 		try:
 			strtime = ""
 			strdate = ""
@@ -1336,11 +1338,16 @@ class TelegramPlugin(octoprint.plugin.EventHandlerPlugin,
 			current_time = datetime.datetime.today()
 			if not currentData["progress"]["printTimeLeft"]:
 				if not printTime == 0:
+					if isinstance(printTime, str):
+						printTime = self.time2secs(printTime)
 					finish_time = current_time + datetime.timedelta(0,int(printTime))
 				else:
 					return ""
 			else:
-				finish_time = current_time + datetime.timedelta(0,int(currentData["progress"]["printTimeLeft"]))
+				left_time = currentData["progress"]["printTimeLeft"]
+				if isinstance(left_time, str):
+					left_time = self.time2secs(printTime)
+				finish_time = current_time + datetime.timedelta(0,int(left_time))
 			strtime = format_time(finish_time)
 			strdate = ""
 			if finish_time.day > current_time.day:
